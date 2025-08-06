@@ -849,7 +849,7 @@ function generateEnemySprites() {
         if (this.traveled > this.maxDistance) this.dead = true;
       }
 
-      // === DRAW METHOD ===
+      // === DRAW METHOD for bullets ===
       draw() {
         ctx.save();
         ctx.translate(this.x, this.y);
