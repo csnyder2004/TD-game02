@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Metadata and Styles -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jungle Tower Defense</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Game Title -->
+  <h1 id="game-title">Cole's Tower Defense</h1>
+
+  <!-- Game Stats (Top Bar) -->
+  <div id="status-row" class="ui-row">
+    <div class="stat-box" id="money-display">💰 Money: 500</div>
+    <div class="stat-box" id="lives-display">❤️ Lives: 10</div>
+    <div class="stat-box" id="wave-display">🌊 Wave: 0</div>
+    <div class="stat-box" id="enemies-left">🧟 Enemies Left: 0</div>
+  </div>
+
+  <!-- Main Game Container -->
+  <div id="game-container">
+    
+
+    <!-- 🟦 Canvas + Controls (stacked vertically) -->
+    <div id="main-panel">
+      <div id="game-area">
+        <canvas id="gameCanvas" width="900" height="600"></canvas>
+      </div>
+
+      <div id="ui">
+        <div id="control-row" class="ui-row">
+          <button id="startBtn">Start Wave</button>
+          <button id="stopBtn">Pause</button>
+          <button id="autoBtn">Auto Start: ON</button>
+          <button id="speedBtn">Speed: 1x</button>
+          <button id="enemyInfoBtn">Enemy Info</button>
+        </div>
+      </div>
+    </div>
+    <!-- 🟥 Tower Selection Sidebar -->
+    <div id="sidebar">
+      <div id="tower-menu">
+        <div class="tooltip">
+          <button data-tower="basic">
+            <img src="towerimages/basictower/sprite.png" alt="Basic Tower" data-tower="basic" />
+          </button>
+          <div class="tooltiptext">$50 Basic</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="sniper">
+            <img src="towerimages/snipertower/sprite.png" alt="Sniper Tower" data-tower="sniper" />
+          </button>
+          <div class="tooltiptext">$120 Sniper</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="cannon">
+            <img src="towerimages/cannontower/sprite.png" alt="Cannon Tower" data-tower="cannon" />
+          </button>
+          <div class="tooltiptext">$150 Cannon</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="flame">
+            <img src="towerimages/flametower/sprite.png" alt="Flame Tower" data-tower="flame" />
+          </button>
+          <div class="tooltiptext">$180 Flame</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="ice">
+            <img src="towerimages/icetower/sprite.png" alt="Ice Tower" data-tower="ice" />
+          </button>
+          <div class="tooltiptext">$200 Ice</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="tesla">
+            <img src="towerimages/teslatower/sprite.png" alt="Tesla Tower" data-tower="tesla" />
+          </button>
+          <div class="tooltiptext">$300 Tesla</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="missile">
+            <img src="towerimages/missiletower/sprite.png" alt="Missile Tower" data-tower="missile" />
+          </button>
+          <div class="tooltiptext">$350 Missile</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="sniperElite">
+            <img src="towerimages/sniperelitetower/sprite.png" alt="Sniper Elite" data-tower="sniperElite" />
+          </button>
+          <div class="tooltiptext">$400 Sniper Elite</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="Obsidian">
+            <img src="towerimages/obsidiantower/sprite.png" alt="Obsidian Tower" data-tower="Obsidian" />
+          </button>
+          <div class="tooltiptext">$500 Obsidian</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="Nova">
+            <img src="towerimages/novatower/sprite.png" alt="Nova Tower" data-tower="Nova" />
+          </button>
+          <div class="tooltiptext">$650 Nova</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="poison">
+            <img src="towerimages/poisontower/sprite.png" alt="Poison Tower" data-tower="poison" />
+          </button>
+          <div class="tooltiptext">$250 Poison</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="railgun">
+            <img src="towerimages/railguntower/sprite.png" alt="Railgun Tower" data-tower="railgun" />
+          </button>
+          <div class="tooltiptext">$800 Railgun</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="hyperLaser">
+            <img src="towerimages/hyperlasertower/sprite.png" alt="HyperLaser Tower" data-tower="hyperLaser" />
+          </button>
+          <div class="tooltiptext">$4,000 HyperLaser</div>
+        </div>
+
+        <div class="tooltip">
+          <button data-tower="omegaCannon">
+            <img src="towerimages/omegacannontower/sprite.png" alt="Omega Cannon" data-tower="omegaCannon" />
+          </button>
+          <div class="tooltiptext">$15,000 Omega Cannon</div>
+        </div>
+      </div>
+
+
+      <button id="cancelTowerBtn">❌ Cancel Placement</button>
+    </div>
+  </div>
+
+  <!-- Floating Message Box (can stay outside) -->
+  <div id="message-box"></div>
+
+  <!-- Upgrade Panel (can remain outside since it's conditionally visible) -->
+  <div id="upgrade-panel">
+    <div>
+      <strong>Upgrade Tower</strong>
+      <div id="upgrade-icons" style="margin-top:4px; font-size: 16px;"></div>
+    </div>
+    <label for="targetModeSelect">Targeting Mode:</label>
+    <select id="targetModeSelect">
+      <option value="first">First</option>
+      <option value="last">Last</option>
+      <option value="strong">Strong</option>
+      <option value="close">Close</option>
+    </select><br />
+    <button id="upgrade1Btn">Upgrade Path 1</button>
+    <button id="upgrade2Btn">Upgrade Path 2</button>
+    <button id="sellBtn">Sell Tower</button>
+  </div>
+
+    <!-- Enemy Info Panel -->
+    <div id="enemy-info-panel" style="display: none;">
+      <h3>Enemy Types</h3>
+      <div id="enemy-list"></div>
+      <button id="closeEnemyInfoBtn">Close</button>
+    </div>
+
+    <!-- Tower Preview Panel -->
+    <div id="tower-preview" style="display: none;">
+      <h3 id="preview-name"></h3>
+      <p id="preview-cost"></p>
+      <ul id="preview-stats"></ul>
+    </div>
+  </div>
+  <!-- Game Script -->
+  <!-- Modular JavaScript Files (Exact Order Matters) -->
+
+  <!-- === SCRIPT ORDER MATTERS === -->
+  <script src="data.js"></script>
+  <script src="ui.js"></script>
+  <script src="utils.js"></script>
+
+  <script src="sprites.js"></script>
+  <script src="path.js"></script>
+
+  <script src="effects.js"></script>
+  <script src="enemies.js"></script>
+  <script src="bullets.js"></script>
+  <script src="towers.js"></script>
+
+  <script src="game.js"></script>
+
+</body>
+</html>
