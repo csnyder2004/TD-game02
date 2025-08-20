@@ -15,13 +15,13 @@ const towerCosts = {
   ice: 200,
   tesla: 300,
   missile: 350,
-  sniperElite: 400,
-  Obsidian: 500,
-  Nova: 650,
+  sniperelite: 400,
+  obsidian: 500,
+  nova: 650,
   poison: 250,
   railgun: 800,
-  hyperLaser: 4000,
-  omegaCannon: 15000,
+  hyperlaser: 4000,
+  omegacannon: 15000,
 };
 //#endregion
 
@@ -34,13 +34,13 @@ const upgradeCosts = {
   ice: [70, 120],
   tesla: [100, 150],
   missile: [120, 180],
-  sniperElite: [150, 220],
-  Obsidian: [200, 300],
-  Nova: [300, 400],
+  sniperelite: [150, 220],
+  obsidian: [200, 300],
+  nova: [300, 400],
   poison: [70, 90],
   railgun: [400, 500],
-  hyperLaser: [1200, 1800],
-  omegaCannon: [2000, 3000],
+  hyperlaser: [1200, 1800],
+  omegacannon: [2000, 3000],
 };
 //#endregion
 
@@ -74,15 +74,15 @@ const upgradeEffects = {
     tower => { tower.damage += 50; tower.explosionStun = 1.5; }, // small stun
     tower => { tower.reloadSpeed = Math.max(12, tower.reloadSpeed - 10); }
   ],
-  sniperElite: [
+  sniperelite: [
     tower => { tower.range += 100; tower.armorPiercing = true; },
     tower => { tower.damage += 50; tower.critChance = 0.25; } // crit hit
   ],
-  Obsidian: [
+  obsidian: [
     tower => { tower.reloadSpeed = Math.max(3, tower.reloadSpeed - 3); tower.burn = { damagePerSecond: 10, duration: 100 }; },
     tower => { tower.damage += 30; tower.blastRadius = 40; }
   ],
-  Nova: [
+  nova: [
     tower => { tower.range += 40; tower.splash = true; },
     tower => { tower.reloadSpeed = Math.max(8, tower.reloadSpeed - 6); tower.damage += 5; }
   ],
@@ -94,11 +94,11 @@ const upgradeEffects = {
     tower => { tower.damage += 200; tower.pierce = 999; }, // hits all in line
     tower => { tower.reloadSpeed = Math.max(8, tower.reloadSpeed - 6); }
   ],
-  hyperLaser: [
+  hyperlaser: [
     tower => { tower.reloadSpeed = Math.max(0.5, tower.reloadSpeed - 1); tower.pierce = 4; },
     tower => { tower.damage += 50; tower.burn = { damagePerSecond: 12, duration: 60 }; }
   ],
-  omegaCannon: [
+  omegacannon: [
     tower => { tower.damage += 500; tower.range += 100; tower.explosionStun = 2; },
     tower => { tower.reloadSpeed = Math.max(5, tower.reloadSpeed - 8); tower.splashRadius = 100; }
   ]
@@ -114,13 +114,13 @@ const upgradePaths = {
   ice: { path1: ["+fireRate", "❄️"], path2: ["+damage", "🧊"] },
   tesla: { path1: ["+range", "⚡"], path2: ["+fireRate", "🔋"] },
   missile: { path1: ["+damage", "🚀"], path2: ["+fireRate", "🧨"] },
-  sniperElite: { path1: ["+range", "🧿"], path2: ["+damage", "🔫"] },
-  Obsidian: { path1: ["+fireRate", "🔥"], path2: ["+damage", "🌋"] },
-  Nova: { path1: ["+range", "🌟"], path2: ["+fireRate", "☀️"] },
+  sniperelite: { path1: ["+range", "🧿"], path2: ["+damage", "🔫"] },
+  obsidian: { path1: ["+fireRate", "🔥"], path2: ["+damage", "🌋"] },
+  nova: { path1: ["+range", "🌟"], path2: ["+fireRate", "☀️"] },
   poison: { path1: ["+range", "☠️"], path2: ["+poison", "🧪"] },
   railgun: { path1: ["+damage", "📡"], path2: ["+fireRate", "⚙️"] },
-  hyperLaser: { path1: ["+fireRate", "🌞"], path2: ["+damage", "⚡"] },
-  omegaCannon: { path1: ["+damage/range", "💥"], path2: ["+fireRate", "⚡"] },
+  hyperlaser: { path1: ["+fireRate", "🌞"], path2: ["+damage", "⚡"] },
+  omegacannon: { path1: ["+damage/range", "💥"], path2: ["+fireRate", "⚡"] },
 };
 //#endregion
 

@@ -14,7 +14,7 @@ class Bullet {
         this.type = type;
 
         // --- Movement and speed settings ---
-        this.speed = (type === "sniperElite") ? 6 : 12;
+        this.speed = (type === "sniperelite") ? 6 : 12;
         this.traveled = 0;
         this.framesAlive = 0;
 
@@ -23,11 +23,11 @@ class Bullet {
         this.hitDetected = false;
 
         // --- Special handling for bullet types ---
-        if (type === "hyperLaser") {
+        if (type === "hyperlaser") {
           this.pierceCount = 4;
           this.maxDistance = 800;
           this.speed = 16;
-        } else if (type === "railgun" || type === "sniperElite") {
+        } else if (type === "railgun" || type === "sniperelite") {
           this.pierceCount = 2;
           this.maxDistance = 600;
           this.speed = 6;
@@ -59,7 +59,7 @@ class Bullet {
 
         // === HIT DETECTION ===
 
-        if (this.type === "hyperLaser") {
+        if (this.type === "hyperlaser") {
           // Multi-hit piercing laser
           enemies.forEach(enemy => {
             if (!enemy.dead && !this.hitEnemies.has(enemy)) {
@@ -105,7 +105,7 @@ class Bullet {
               }
               break;
 
-            case "Obsidian":
+            case "obsidian":
               this.target.health -= this.damage;
               if (!this.target.burn) {
                 this.target.burn = { damagePerSecond: 5, duration: 3, elapsed: 0 };
@@ -113,7 +113,7 @@ class Bullet {
               effects.push(new BurnEffect(this.x, this.y));
               break;
 
-            case "omegaCannon":
+            case "omegacannon":
               enemies.forEach(e => {
                 if (!e.dead && distance(this.x, this.y, this.target.x, this.target.y) < 100) {
                   e.health -= this.damage;
@@ -222,7 +222,7 @@ class Bullet {
             ctx.stroke();
             break;
 
-          case "sniperElite":
+          case "sniperelite":
             ctx.strokeStyle = "#ff00ff";
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -231,7 +231,7 @@ class Bullet {
             ctx.stroke();
             break;
 
-          case "Obsidian":
+          case "obsidian":
             ctx.fillStyle = "#a83232";
             ctx.beginPath();
             ctx.arc(0, 0, 5, 0, Math.PI * 2);
@@ -242,14 +242,14 @@ class Bullet {
             ctx.fill();
             break;
 
-          case "Nova":
+          case "nova":
             ctx.fillStyle = "#ffffff";
             ctx.beginPath();
             ctx.arc(0, 0, 5 + Math.sin(Date.now() / 50) * 2, 0, Math.PI * 2);
             ctx.fill();
             break;
 
-          case "hyperLaser":
+          case "hyperlaser":
             // Core laser beam
             ctx.strokeStyle = "#ffff66";
             ctx.lineWidth = 3 + Math.sin(this.framesAlive * 0.6);
@@ -280,7 +280,7 @@ class Bullet {
             ctx.fill();
             break;
 
-          case "omegaCannon":
+          case "omegacannon":
             const gradient = ctx.createRadialGradient(0, 0, 2, 0, 0, 12);
             gradient.addColorStop(0, "#fff");
             gradient.addColorStop(0.3, "#99f");

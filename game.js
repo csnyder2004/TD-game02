@@ -193,13 +193,13 @@ const upgradeDescriptions = {
   ice: ["Faster + slow", "Damage + freeze chance"],
   tesla: ["Range + chain", "Faster reload"],
   missile: ["Damage + stun", "Faster reload"],
-  sniperElite: ["Range + AP", "Damage + crit"],
-  Obsidian: ["Faster + burn", "Damage + blast"],
-  Nova: ["Range + splash", "Faster + dmg"],
+  sniperelite: ["Range + AP", "Damage + crit"],
+  obsidian: ["Faster + burn", "Damage + blast"],
+  nova: ["Range + splash", "Faster + dmg"],
   poison: ["Longer poison", "Stronger poison"],
   railgun: ["Huge damage + pierce", "Faster reload"],
-  hyperLaser: ["Faster + pierce", "Damage + burn"],
-  omegaCannon: ["Damage + range + stun", "Faster + big splash"]
+  hyperlaser: ["Faster + pierce", "Damage + burn"],
+  omegacannon: ["Damage + range + stun", "Faster + big splash"]
 };
 //#endregion
 
@@ -214,7 +214,7 @@ function gameLoop() {
     if (placingTower && selectedTowerType) {
       ctx.save();
       const towerRange = ({
-        sniper:200,cannon:120,flame:80,ice:90,tesla:110,missile:160,sniperElite:250,Obsidian:160,Nova:100,poison:100,railgun:400,hyperLaser:280,omegaCannon:280
+        sniper:200,cannon:120,flame:80,ice:90,tesla:110,missile:160,sniperelite:250,obsidian:160,nova:100,poison:100,railgun:400,hyperlaser:280,omegacannon:280
       })[selectedTowerType] ?? 100;
       let valid = true;
       for (let i = 0; i < enemyPath.length - 1; i++) {
@@ -291,13 +291,13 @@ upgrade2Btn?.addEventListener("click", () => {
     case "ice": selectedTower.damage += 12; break;
     case "tesla": selectedTower.reloadSpeed = Math.max(6, selectedTower.reloadSpeed - 6); break;
     case "missile": selectedTower.reloadSpeed = Math.max(25, selectedTower.reloadSpeed - 20); break;
-    case "sniperElite": selectedTower.damage += 40; break;
-    case "Obsidian": selectedTower.damage += 25; break;
-    case "Nova": selectedTower.reloadSpeed = Math.max(10, selectedTower.reloadSpeed - 8); break;
+    case "sniperelite": selectedTower.damage += 40; break;
+    case "obsidian": selectedTower.damage += 25; break;
+    case "nova": selectedTower.reloadSpeed = Math.max(10, selectedTower.reloadSpeed - 8); break;
     case "poison": selectedTower.damage += 12; break;
     case "railgun": selectedTower.reloadSpeed = Math.max(8, selectedTower.reloadSpeed - 10); break;
-    case "hyperLaser": selectedTower.damage += 50; break;
-    case "omegaCannon": selectedTower.reloadSpeed = Math.max(5, selectedTower.reloadSpeed - 8); break;
+    case "hyperlaser": selectedTower.damage += 50; break;
+    case "omegacannon": selectedTower.reloadSpeed = Math.max(5, selectedTower.reloadSpeed - 8); break;
   }
   updateDisplays(); showMessage(`✅ ${type} Path 2 Upgraded!`, 1000);
 });

@@ -16,13 +16,13 @@ class Tower {
       case "ice": this.range = 90; this.damage = 5; this.reloadSpeed = 20; this.size = 80; break;
       case "tesla": this.range = 110; this.damage = 35; this.reloadSpeed = 15; this.size = 90; break;
       case "missile": this.range = 160; this.damage = 50; this.reloadSpeed = 50; this.size = 90; break;
-      case "sniperElite": this.range = 250; this.damage = 70; this.reloadSpeed = 30; this.size = 90; break;
-      case "Obsidian": this.range = 160; this.damage = 40; this.reloadSpeed = 12; this.size = 110; break;
-      case "Nova": this.range = 100; this.damage = 60; this.reloadSpeed = 20; this.fireCooldown = 0; this.size = 65; break;
+      case "sniperelite": this.range = 250; this.damage = 70; this.reloadSpeed = 30; this.size = 90; break;
+      case "obsidian": this.range = 160; this.damage = 40; this.reloadSpeed = 12; this.size = 110; break;
+      case "nova": this.range = 100; this.damage = 60; this.reloadSpeed = 20; this.fireCooldown = 0; this.size = 65; break;
       case "poison": this.range = 100; this.damage = 10; this.reloadSpeed = 20; this.size = 75; break;
       case "railgun": this.range = 400; this.damage = 200; this.reloadSpeed = 100; this.size = 115; break;
-      case "hyperLaser": this.range = 280; this.damage = 65; this.reloadSpeed = 2; this.size = 100; break;
-      case "omegaCannon": this.range = 280; this.damage = 800; this.reloadSpeed = 20; this.size = 120; break;
+      case "hyperlaser": this.range = 280; this.damage = 65; this.reloadSpeed = 2; this.size = 100; break;
+      case "omegacannon": this.range = 280; this.damage = 800; this.reloadSpeed = 20; this.size = 120; break;
     }
 
     this.upgrades = { path1: 0, path2: 0 };
@@ -57,12 +57,12 @@ class Tower {
       case "tesla":
         enemies.forEach(e => { if (!e.dead && distance(e.x, e.y, target.x, target.y) < 40) e.health -= this.damage; });
         break;
-      case "Obsidian":
+      case "obsidian":
         target.health -= this.damage; if (!target.burn) target.burn = { damagePerSecond: 5, duration: 3, elapsed: 0 };
         effects.push(new BurnEffect(target.x, target.y)); break;
       case "poison":
         target.health -= this.damage * 0.3; if (!target.poison) target.poison = { dps: 4, duration: 4, elapsed: 0 }; break;
-      case "Nova":
+      case "nova":
         if (this.fireCooldown <= 0) {
           enemies.forEach(e => { if (distance(this.x, this.y, e.x, e.y) <= this.range) e.health -= this.damage; });
           this.fireCooldown = this.reloadSpeed; effects.push(new SunBeamEffect(this.x, this.y));
